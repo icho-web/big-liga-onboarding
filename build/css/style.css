@@ -630,7 +630,7 @@ button,
 
 .main {
   position: relative;
-  padding-top: 46px;
+  padding-top: 13px;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -663,7 +663,7 @@ button,
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    min-height: 648px; }
+    min-height: 615px; }
   .main.init .main__text-wrapper {
     opacity: 1;
     -webkit-transform: translateY(0);

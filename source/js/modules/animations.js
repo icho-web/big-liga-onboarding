@@ -10,6 +10,7 @@ const animations = () => {
   if (loader) {
     let loaderInit = () => {
       body.style.overflow = 'hidden';
+      body.style.height = '100vh';
 
       setTimeout(() => {
         loaderDesc.style.opacity = '1';
@@ -30,7 +31,7 @@ const animations = () => {
         main.classList.add('init');
       }, 600);
 
-      body.style.overflow = '';
+      body.style = '';
       window.removeEventListener('keydown', onKeydown);
       loader.removeEventListener('click', closeLoader);
     };
