@@ -5,6 +5,7 @@ const animations = () => {
   const loaderDesc = document.querySelector('.loader__desc');
   const body = document.body;
   const sidePanel = document.querySelector('.main__text-wrapper');
+  const viewportMd = '(max-width: 1023px)';
 
   if (loader) {
     let loaderInit = () => {
@@ -52,14 +53,16 @@ const animations = () => {
     };
 
     window.addEventListener('resize', () => {
-      if (window.matchMedia('(max-width: 1023px)').matches) {
+      if (window.matchMedia(viewportMd).matches) {
         main.addEventListener('click', openSidePanel);
       } else {
         main.removeEventListener('click', openSidePanel);
+        sidePanel.classList.remove('active');
+        body.style.cssText = '';
       }
     });
 
-    if (window.matchMedia('(max-width: 1023px)').matches) {
+    if (window.matchMedia(viewportMd).matches) {
       main.addEventListener('click', openSidePanel);
     }
   }
