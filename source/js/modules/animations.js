@@ -1,13 +1,12 @@
 const animations = () => {
   const main = document.querySelector('.main');
   const ANIMATION_END_TIME = 1200;
-  const container = document.querySelector('.loader');
+  const loader = document.querySelector('.loader');
   const loaderDesc = document.querySelector('.loader__desc');
   const body = document.body;
-  const viewportMd = window.matchMedia('(max-width: 1023px)').matches;
   const sidePanel = document.querySelector('.main__text-wrapper');
 
-  if (container) {
+  if (loader) {
     let loaderInit = () => {
       body.style.overflow = 'hidden';
 
@@ -23,44 +22,47 @@ const animations = () => {
     };
 
     let closeLoader = () => {
-      container.classList.add('hidden');
+      loader.classList.add('hidden');
 
       setTimeout(() => {
-        container.style.display = 'none';
+        loader.style.display = 'none';
         main.classList.add('init');
       }, 600);
 
       body.style.overflow = '';
       window.removeEventListener('keydown', onKeydown);
-      container.removeEventListener('click', closeLoader);
+      loader.removeEventListener('click', closeLoader);
     };
 
     loaderInit();
 
-    container.addEventListener('click', closeLoader);
+    loader.addEventListener('click', closeLoader);
     window.addEventListener('keydown', onKeydown);
   }
 
   if (main) {
-    if (viewportMd) {
-      main.addEventListener('click', (evt) => {
-        if (!evt.target.classList.contains('main__text-wrapper')) {
-          sidePanel.classList.add('active');
-          body.style.cssText = 'height: 100vh; overflow: hidden;';
-        } else {
-          sidePanel.classList.remove('active');
-          body.style.cssText = '';
-        }
-      });
+    let openSidePanel = (evt) => {
+      if (!evt.target.classList.contains('main__text-wrapper')) {
+        sidePanel.classList.add('active');
+        body.style.cssText = 'height: 100vh; overflow: hidden;';
+      } else {
+        sidePanel.classList.remove('active');
+        body.style.cssText = '';
+      }
+    };
+
+    window.addEventListener('resize', () => {
+      if (window.matchMedia('(max-width: 1023px)').matches) {
+        main.addEventListener('click', openSidePanel);
+      } else {
+        main.removeEventListener('click', openSidePanel);
+      }
+    });
+
+    if (window.matchMedia('(max-width: 1023px)').matches) {
+      main.addEventListener('click', openSidePanel);
     }
   }
-
-  window.addEventListener('resize', () => {
-    if (!viewportMd) {
-      sidePanel.classList.remove('active');
-      body.style.cssText = '';
-    }
-  });
 };
 
 export {animations};
