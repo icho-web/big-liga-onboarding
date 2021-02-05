@@ -1,0 +1,71 @@
+@keyframes loaderInit {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.loader {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  background-color: $color-default-white;
+  transition: opacity $modal-transition-settings;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+.loader__logo {
+  width: 801px;
+  height: 100px;
+
+  animation-duration: 1.2s;
+  animation-name: loaderInit;
+
+  @include viewport--md {
+    width: 550px;
+    height: 70px;
+  }
+}
+
+.loader__desc {
+  position: absolute;
+  bottom: 103px;
+  opacity: 0;
+
+  margin: 0;
+
+  font-size: 24px;
+  line-height: 22px;
+  animation-duration: 1.2s;
+  animation-name: loaderInit;
+  animation-delay: 0.6s;
+
+  .tablet {
+    display: none;
+  }
+
+  @include viewport--md {
+    .tablet {
+      display: inline;
+    }
+
+    .desktop {
+      display: none;
+    }
+  }
+}

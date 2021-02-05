@@ -1,0 +1,161 @@
+.main {
+  position: relative;
+
+  padding-top: 46px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    margin: 0;
+    padding-top: 59px;
+    width: 576px;
+    flex-shrink: 0;
+    transform: translateY(15px);
+
+    font-weight: normal;
+    font-size: 96px;
+    line-height: 96px;
+    color: $color-neon-blue;
+    opacity: 0;
+    transition: opacity $modal-transition-settings, transform 0.6s ease;
+  }
+
+  .container {
+    position: relative;
+
+    display: flex;
+    min-height: 648px;
+  }
+
+  &.init {
+    .main__text-wrapper {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .main__bg {
+      opacity: 1;
+    }
+
+    h1 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @include viewport--md {
+    cursor: pointer;
+
+    h1 {
+      width: 100%;
+      pointer-events: none;
+    }
+
+    .container {
+      position: static;
+    }
+
+    &.init {
+      .main__text-wrapper {
+        opacity: 1;
+        transform: translateX(-100%);
+        transition: transform $modal-transition-settings;
+
+        &.active {
+          display: flex;
+          transform: translateX(0);
+        }
+      }
+
+      .main__bg {
+        opacity: 1;
+      }
+
+      h1 {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+.main__text-wrapper {
+  width: 384px;
+  padding-left: 26px;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(15px);
+
+  transition: opacity $modal-transition-settings, transform 0.6s ease;
+  transition-delay: 0.6s;
+
+  .main__svg {
+    margin-bottom: 26px;
+  }
+
+  .main__svg-white {
+    display: none;
+    pointer-events: none;
+  }
+
+  p {
+    margin: 0;
+
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 40px;
+    pointer-events: none;
+  }
+
+  @include viewport--md {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 0 35px;
+    padding-top: 161px;
+    transform: translateX(-100%);
+
+    transition: $default-transition-settings;
+    transition-delay: 0;
+    opacity: 1;
+    background-color: $color-neon-blue;
+    cursor: pointer;
+
+    p {
+      width: 352px;
+      color: $color-default-white;
+    }
+
+    .main__svg {
+      display: none;
+    }
+
+    .main__svg-white {
+      display: block;
+      margin-bottom: 31px;
+    }
+  }
+}
+
+.main__bg {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+
+  transform: translateX(-50%);
+  transition: opacity $modal-transition-settings;
+
+  @include viewport--md {
+    display: none;
+  }
+}
